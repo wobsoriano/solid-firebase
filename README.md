@@ -102,11 +102,10 @@ import { useDownloadURL } from 'solid-firebase'
 
 const App = () => {
   const storage = getStorage()
-  const screenshotRef = ref(
+  const state = useDownloadURL(ref(
     storage,
     'images/yourimage.jpg',
-  )
-  const state = useDownloadURL(screenshotRef)
+  ))
 
   return (
     <Switch>
