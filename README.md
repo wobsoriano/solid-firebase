@@ -10,7 +10,7 @@ Install it:
 yarn add solid-firebase
 ```
 
-Use it:
+Configure firebase app:
 
 ```tsx
 import { render } from 'solid-js/web'
@@ -27,4 +27,29 @@ render(
   ),
   document.getElementById('root') as HTMLElement,
 )
+```
+
+## Firebase Authentication
+
+`solid-firebase` provides a convenience listener for Firebase Auth's auth status.
+
+```tsx
+import { getAuth } from "firebase/auth";
+import { For, Show } from "solid-js";
+import { useAuth } from "solid-firebase";
+
+const App = () => {
+  const auth = getAuth();
+  const { isLoading, isAuthenticated, user } = useAuth(auth);
+
+  return (
+    <div>
+      <Show when={!isLoading()} fallback={<div>Loading...</div>}>
+        <Show when={isAuthenticated()} fallback={<Login />}>
+          {user.data?.email}
+        </Show>
+      </Show>
+    </div>
+  );
+};
 ```
