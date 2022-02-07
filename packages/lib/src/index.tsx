@@ -1,6 +1,7 @@
 import { useAuth } from './hooks/useAuth';
 import { useFirebaseApp } from './hooks/useFirebaseApp';
 import { useFirestore } from './hooks/useFirestore';
+import { useDownloadURL } from './hooks/useDownloadURL';
 import { FirebaseProvider } from './FirebaseProvider';
 
-export { FirebaseProvider, useAuth, useFirebaseApp, useFirestore };
+export { FirebaseProvider, useAuth, useFirebaseApp, useFirestore, useDownloadURL };

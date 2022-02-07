@@ -62,7 +62,7 @@ const App = () => {
 }
 ```
 
-## Firestore
+## Cloud Firestore
 
 `useFirestore` is a [Cloud Firestore](https://firebase.google.com/docs/firestore) binding that makes it straightforward to always keep your local data in sync with remotes databases.
 
@@ -85,6 +85,39 @@ const App = () => {
       </Match>
       <Match when={todos.error}>
         <div>An error occurred.</div>
+      </Match>
+    </Switch>
+  )
+}
+```
+
+## Cloud Storage
+
+`useDownloadURL` is a hook that wraps the [getDownloadURL](https://firebase.google.com/docs/storage/web/download-files#download_data_via_url) method of [Cloud Storage](https://firebase.google.com/docs/storage).
+
+```tsx
+import { Match, Switch } from 'solid-js'
+import { getStorage, ref } from 'firebase/storage'
+import { useDownloadURL } from 'solid-firebase'
+
+const App = () => {
+  const storage = getStorage()
+  const screenshotRef = ref(
+    storage,
+    'images/yourimage.jpg',
+  )
+  const state = useDownloadURL(screenshotRef)
+
+  return (
+    <Switch>
+      <Match when={state.loading}>
+        <p>Download URL: Loading...</p>
+      </Match>
+      <Match when={state.error}>
+        <p>Error: {state.error?.name}</p>
+      </Match>
+      <Match when={state.data}>
+        <img src={state.data} alt="pic" />
       </Match>
     </Switch>
   )
