@@ -1,7 +1,15 @@
 {
-  "name": "solid-firebase",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Robert Soriano <sorianorobertc@gmail.com>",
-  "license": "MIT"
+  "name": "monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "lib": "yarn workspace solid-firebase",
+    "demo": "yarn workspace demo",
+    "build:lib": "yarn lib build",
+    "build:demo": "yarn demo build",
+    "clean:modules": "rm -rf node_modules && rm -rf packages/lib/node_modules && rm -rf packages/demo/node_modules",
+    "copy:readme": "cp README.md packages/lib/README.md"
+  }
 }
