@@ -59,6 +59,14 @@ export function useFirestore<T extends DocumentData>(
   options?: FirestoreOptions,
 ): { data: T[] | undefined };
 
+/**
+ * Provides convenience listeners for Collections
+ * and Documents stored with Cloud Firestore.
+ *
+ * @param docRef
+ * @param initialValue
+ * @param options
+ */
 export function useFirestore<T extends DocumentData>(
   docRef: FirebaseDocRef<T>,
   initialValue: any = undefined,

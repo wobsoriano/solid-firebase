@@ -5,7 +5,7 @@ export const useFirebaseApp = () => {
   const ctx = useContext(FirebaseContext);
 
   if (!ctx) {
-    throw new Error('useFirebaseApp must be used within a FirebaseContext.Provider');
+    throw new Error('useFirebaseApp must be used within a <FirebaseContext.Provider />');
   }
 
   return ctx;
