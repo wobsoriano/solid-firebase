@@ -52,7 +52,7 @@ const App = () => {
   return (
     <Switch>
       <Match when={state.loading}>
-        <div>Loading...</div>
+        <p>Loading...</p>
       </Match>
       <Match when={state.error}>
         <Login />
@@ -84,10 +84,10 @@ const App = () => {
   return (
     <Switch>
       <Match when={todos.loading}>
-        <div>Loading...</div>
+        <p>Loading...</p>
       </Match>
       <Match when={todos.error}>
-        <div>An error occurred.</div>
+        <p>An error occurred.</p>
       </Match>
       <Match when={todos.data}>
         <TodoList data={todos.data} />
