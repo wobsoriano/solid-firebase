@@ -1,0 +1,7 @@
+{
+  "name": "solid-firebase",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Robert Soriano <sorianorobertc@gmail.com>",
+  "license": "MIT"
+}

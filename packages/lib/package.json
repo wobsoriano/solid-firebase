@@ -1,0 +1,38 @@
+{
+  "version": "0.1.0",
+  "name": "solid-firebase",
+  "description": "{{ desc_of_lib }}",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/esm/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "solid": "./dist/source/index.jsx",
+      "default": "./dist/esm/index.js"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wobsoriano/solid-firebase.git"
+  },
+  "keywords": [],
+  "author": "Robert Soriano",
+  "license": "MIT",
+  "homepage": "https://github.com/wobsoriano/solid-firebase#readme",
+  "dependencies": {
+    "solid-js": "^1.1.7"
+  },
+  "devDependencies": {
+    "rollup": "^2.58.0",
+    "rollup-preset-solid": "^1.0.1",
+    "typescript": "^4.4.4"
+  }
+}
