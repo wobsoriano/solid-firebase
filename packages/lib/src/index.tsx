@@ -1,3 +1,5 @@
-import { useHello } from './useHello';
+import { useAuth } from './hooks/useAuth';
+import { useFirebaseApp } from './hooks/useFirebaseApp';
+import { useFirestore } from './hooks/useFirestore';
 
-export { useHello };
+export { useAuth, useFirebaseApp, useFirestore };

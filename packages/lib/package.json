@@ -28,6 +28,7 @@
   "license": "MIT",
   "homepage": "https://github.com/wobsoriano/solid-firebase#readme",
   "dependencies": {
+    "firebase": "^9.6.6",
     "solid-js": "^1.1.7"
   },
   "devDependencies": {
