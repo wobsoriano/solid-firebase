@@ -84,3 +84,7 @@ const App = () => {
   )
 }
 ```
+
+## License
+
+MIT License © 2022 [Robert Soriano](https://github.com/wobsoriano)
