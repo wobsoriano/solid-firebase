@@ -66,8 +66,8 @@ const App = () => {
 `useFirestore` is a [Cloud Firestore](https://firebase.google.com/docs/firestore) binding that makes it straightforward to always keep your local data in sync with remotes databases.
 
 ```tsx
-import { collection, doc, getFirestore } from 'firebase/firestore'
 import { For } from 'solid-js'
+import { collection, doc, getFirestore } from 'firebase/firestore'
 import { useFirestore } from 'solid-firebase'
 
 const App = () => {
