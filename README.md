@@ -7,7 +7,7 @@ Solid hooks for Firebase.
 Install it:
 
 ```bash
-yarn add solid-firebase
+yarn add firebase solid-firebase
 ```
 
 Configure firebase app:
