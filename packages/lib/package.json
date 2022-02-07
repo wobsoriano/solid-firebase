@@ -1,5 +1,5 @@
 {
-  "version": "0.1.2",
+  "version": "0.1.0",
   "name": "solid-firebase",
   "description": "Solid hooks for Firebase.",
   "type": "module",
@@ -35,5 +35,6 @@
     "rollup": "^2.58.0",
     "rollup-preset-solid": "^1.0.1",
     "typescript": "^4.4.4"
-  }
+  },
+  "sideEffects": false
 }
