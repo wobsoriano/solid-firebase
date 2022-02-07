@@ -34,7 +34,7 @@ render(
 `useAuth` is a [Firebase Auth](https://firebase.google.com/docs/auth) binding to easily react to changes in the users' authentication status.
 
 ```tsx
-import { Show } from 'solid-js'
+import { Switch, Match } from 'solid-js'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
 import { useAuth } from 'solid-firebase'
 
@@ -47,16 +47,17 @@ const Login = () => {
 
 const App = () => {
   const auth = getAuth()
-  const { isLoading, isAuthenticated, user } = useAuth(auth)
+  const state = useAuth(auth)
 
   return (
-    <div>
-      <Show when={!isLoading()} fallback={<Loading />}>
-        <Show when={isAuthenticated()} fallback={<Login />}>
-          {user.data?.email}
-        </Show>
-      </Show>
-    </div>
+    <Switch fallback={<User data={state.data} />}>
+      <Match when={state.loading}>
+        <div>Loading...</div>
+      </Match>
+      <Match when={state.error}>
+        <Login />
+      </Match>
+    </Switch>
   )
 }
 ```
@@ -78,14 +79,12 @@ const App = () => {
   const todo = useFirestore(doc(db, 'todos', 'todo-id'))
 
   return (
-    <Switch fallback={<div>Error</div>}>
+    <Switch fallback={<TodoList data={todos.data}>}>
       <Match when={todos.loading}>
         <div>Loading...</div>
       </Match>
-      <Match when={!todos.error}>
-        <For each={todos.data}>
-          {item => <div>{item.content}</div>}
-        </For>
+      <Match when={todos.error}>
+        <div>An error occurred.</div>
       </Match>
     </Switch>
   )
