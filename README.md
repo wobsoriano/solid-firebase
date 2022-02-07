@@ -29,18 +29,25 @@ render(
 )
 ```
 
-## Firebase Authentication
+## Authentication
 
-`solid-firebase` provides a convenience listener for Firebase Auth's auth status.
+Convenience listener for Firebase Auth's auth status.
 
 ```tsx
-import { getAuth } from "firebase/auth";
-import { For, Show } from "solid-js";
-import { useAuth } from "solid-firebase";
+import { Show } from 'solid-js'
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
+import { useAuth } from 'solid-firebase'
+
+const Login = () => {
+  const auth = getAuth()
+  const signIn = () => signInWithPopup(auth, new GoogleAuthProvider())
+
+  return <button onClick={signIn}>Sign In with Google</button>
+}
 
 const App = () => {
-  const auth = getAuth();
-  const { isLoading, isAuthenticated, user } = useAuth(auth);
+  const auth = getAuth()
+  const { isLoading, isAuthenticated, user } = useAuth(auth)
 
   return (
     <div>
@@ -50,6 +57,11 @@ const App = () => {
         </Show>
       </Show>
     </div>
-  );
-};
+  )
+}
 ```
+
+## Firestore
+
+Convenience listener for Collections and Documents stored with Cloud Firestore.
+
