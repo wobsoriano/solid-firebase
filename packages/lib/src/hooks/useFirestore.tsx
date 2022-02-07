@@ -2,16 +2,13 @@ import type {
   DocumentData,
   DocumentReference,
   DocumentSnapshot,
+  FirestoreError,
   Query,
   QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { onSnapshot } from 'firebase/firestore';
 import { onCleanup } from 'solid-js';
 import { createStore, reconcile } from 'solid-js/store';
-
-export interface FirestoreOptions {
-  errorHandler?: (err: Error) => void;
-}
 
 export type FirebaseDocRef<T> = Query<T> | DocumentReference<T>;
 
@@ -36,87 +33,98 @@ function isDefined<T = any>(val?: T): val is T {
   return typeof val !== 'undefined';
 }
 
+interface UseFireStoreReturn<T> {
+  data: T;
+  loading: boolean;
+  error: FirestoreError | null;
+}
+
 export function useFirestore<T extends DocumentData>(
   docRef: DocumentReference<T>,
   initialValue: T,
-  options?: FirestoreOptions,
-): { data: T | null };
+): UseFireStoreReturn<T | null>;
 export function useFirestore<T extends DocumentData>(
   docRef: Query<T>,
   initialValue: T[],
-  options?: FirestoreOptions,
-): { data: T[] };
+): UseFireStoreReturn<T[]>;
 
 // nullable initial values
 export function useFirestore<T extends DocumentData>(
   docRef: DocumentReference<T>,
   initialValue?: T | undefined,
-  options?: FirestoreOptions,
-): { data: T | undefined | null };
+): UseFireStoreReturn<T | undefined | null>;
 export function useFirestore<T extends DocumentData>(
   docRef: Query<T>,
   initialValue?: T[],
-  options?: FirestoreOptions,
-): { data: T[] | undefined };
+): UseFireStoreReturn<T[] | undefined>;
 
-/**
- * Provides convenience listeners for Collections
- * and Documents stored with Cloud Firestore.
- *
- * @param docRef
- * @param initialValue
- * @param options
- */
 export function useFirestore<T extends DocumentData>(
   docRef: FirebaseDocRef<T>,
   initialValue: any = undefined,
-  options: FirestoreOptions = {},
 ) {
-  const { errorHandler = (err: Error) => console.error(err) } = options;
-
   if (isDocumentReference<T>(docRef)) {
-    const [data, setData] = createStore<{ data: T | null | undefined }>({
+    const [state, setState] = createStore<UseFireStoreReturn<T | null>>({
       data: initialValue,
+      loading: true,
+      error: null,
     });
 
     const close = onSnapshot(
       docRef,
       (snapshot) => {
-        setData(
+        setState(
           reconcile({
+            loading: false,
             data: getData(snapshot) || null,
           }),
         );
       },
-      errorHandler,
+      (error) => {
+        setState(
+          reconcile({
+            loading: false,
+            error,
+          }),
+        );
+      },
     );
 
     onCleanup(() => {
       close();
     });
 
-    return data;
+    return state;
   }
 
-  const [data, setData] = createStore<{ data: T[] | undefined }>({
+  const [state, setState] = createStore({
     data: initialValue,
+    loading: true,
+    error: null as FirestoreError | null,
   });
 
   const close = onSnapshot(
     docRef,
     (querySnapshot) => {
-      setData(
+      setState(
         reconcile({
+          loading: false,
           data: querySnapshot.docs.map(getData).filter(isDefined),
         }),
       );
     },
-    errorHandler,
+    (error) => {
+      setState(
+        reconcile({
+          loading: false,
+          error,
+        }),
+      );
+    },
   );
 
   onCleanup(() => {
     close();
   });
 
-  return data;
+  return state;
 }
