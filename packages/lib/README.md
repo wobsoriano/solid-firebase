@@ -1,17 +1,86 @@
-# {{ name_of_lib }}
+# solid-firebase
 
-{{ desc_of_lib }}
+Firebase bindings for Solid.
 
 ## Quick start
 
 Install it:
 
 ```bash
-pnpm add {{ me }}/{{ name_of_lib }}
+yarn add solid-firebase
 ```
 
-Use it:
+Configure firebase app:
 
 ```tsx
-import {{ name_of_lib }} from '{{ name_of_lib }}'
+import { render } from 'solid-js/web'
+import { FirebaseProvider } from 'solid-firebase'
+import App from './App'
+
+const firebaseConfig = {...}
+
+render(
+  () => (
+    <FirebaseProvider config={config}>
+      <App />
+    </FirebaseProvider>
+  ),
+  document.getElementById('root') as HTMLElement,
+)
+```
+
+## Authentication
+
+Convenience listener for Firebase Auth's auth status.
+
+```tsx
+import { Show } from 'solid-js'
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
+import { useAuth } from 'solid-firebase'
+
+const Login = () => {
+  const auth = getAuth()
+  const signIn = () => signInWithPopup(auth, new GoogleAuthProvider())
+
+  return <button onClick={signIn}>Sign In with Google</button>
+}
+
+const App = () => {
+  const auth = getAuth()
+  const { isLoading, isAuthenticated, user } = useAuth(auth)
+
+  return (
+    <div>
+      <Show when={!isLoading()} fallback={<div>Loading...</div>}>
+        <Show when={isAuthenticated()} fallback={<Login />}>
+          {user.data?.email}
+        </Show>
+      </Show>
+    </div>
+  )
+}
+```
+
+## Firestore
+
+Convenience listener for Collections and Documents stored with Cloud Firestore.
+
+```tsx
+import { collection, doc, getFirestore } from 'firebase/firestore'
+import { For } from 'solid-js'
+import { useFirestore } from 'solid-firebase'
+
+const App = () => {
+  const db = getFirestore()
+  const todos = useFirestore(collection(db, 'todos'))
+
+  // or for doc reference
+  const todo = useFirestore(doc(db, 'todos', 'todo-id'))
+
+  return (
+    <For each={todos.data} fallback={<Loading />}>
+      {(item) => <div>{item.text}</div>}
+    </For>
+  )
+}
 ```

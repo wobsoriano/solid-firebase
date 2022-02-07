@@ -65,3 +65,22 @@ const App = () => {
 
 Convenience listener for Collections and Documents stored with Cloud Firestore.
 
+```tsx
+import { collection, doc, getFirestore } from 'firebase/firestore'
+import { For } from 'solid-js'
+import { useFirestore } from 'solid-firebase'
+
+const App = () => {
+  const db = getFirestore()
+  const todos = useFirestore(collection(db, 'todos'))
+
+  // or for doc reference
+  const todo = useFirestore(doc(db, 'todos', 'todo-id'))
+
+  return (
+    <For each={todos.data} fallback={<Loading />}>
+      {(item) => <div>{item.text}</div>}
+    </For>
+  )
+}
+```
