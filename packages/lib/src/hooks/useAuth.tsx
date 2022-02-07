@@ -1,5 +1,6 @@
 import type { Auth, User } from 'firebase/auth';
-import { createMemo, createSignal, onCleanup } from 'solid-js';
+import { onIdTokenChanged } from 'firebase/auth';
+import { onCleanup } from 'solid-js';
 import { createStore, reconcile } from 'solid-js/store';
 
 /**
@@ -8,24 +9,39 @@ import { createStore, reconcile } from 'solid-js/store';
  * @param auth
  */
 export function useAuth(auth: Auth) {
-  const [user, setUser] = createStore<{ data: User | null }>({ data: null });
-  const [isLoading, setIsLoading] = createSignal(true);
-  const isAuthenticated = createMemo(() => !!user.data);
-
-  const unsub = auth.onIdTokenChanged((authUser) => {
-    setIsLoading(false);
-    setUser(
-      reconcile({
-        data: authUser,
-      }),
-    );
+  const [state, setState] = createStore<{
+    loading: boolean;
+    data: User | null;
+    error: Error | null;
+  }>({
+    loading: true,
+    data: null,
+    error: null,
   });
+
+  const unsub = onIdTokenChanged(
+    auth,
+    (authUser) => {
+      setState(
+        reconcile({
+          loading: false,
+          data: authUser,
+          error: null,
+        }),
+      );
+    },
+    (error) => {
+      setState(
+        reconcile({
+          loading: false,
+          data: null,
+          error,
+        }),
+      );
+    },
+  );
 
   onCleanup(unsub);
 
-  return {
-    user,
-    isAuthenticated,
-    isLoading,
-  };
+  return state;
 }
