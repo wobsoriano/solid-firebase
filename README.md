@@ -1,6 +1,6 @@
 # solid-firebase
 
-Firebase bindings for Solid.
+Solid hooks for Firebase.
 
 ## Quick start
 

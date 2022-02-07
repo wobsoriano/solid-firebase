@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "name": "solid-firebase",
-  "description": "{{ desc_of_lib }}",
+  "description": "Solid hooks for Firebase.",
   "type": "module",
   "files": [
     "dist"
