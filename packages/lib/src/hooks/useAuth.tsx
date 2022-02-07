@@ -8,11 +8,15 @@ import { createStore, reconcile } from 'solid-js/store';
  * @param auth
  */
 export function useAuth(auth: Auth) {
-  const [user, setUser] = createStore<User | Partial<User>>({});
-  const isAuthenticated = createMemo(() => !!Object.keys(user).length);
+  const [user, setUser] = createStore<{ data: User | null }>({ data: null });
+  const isAuthenticated = createMemo(() => !!user.data);
 
   const unsub = auth.onIdTokenChanged((authUser) => {
-    setUser(reconcile(authUser || {}));
+    setUser(
+      reconcile({
+        data: authUser,
+      }),
+    );
   });
 
   onCleanup(unsub);
