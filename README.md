@@ -50,12 +50,15 @@ const App = () => {
   const state = useAuth(auth)
 
   return (
-    <Switch fallback={<User data={state.data} />}>
+    <Switch>
       <Match when={state.loading}>
         <div>Loading...</div>
       </Match>
       <Match when={state.error}>
         <Login />
+      </Match>
+      <Match when={state.data}>
+        <User data={state.data} />
       </Match>
     </Switch>
   )
@@ -79,12 +82,15 @@ const App = () => {
   const todo = useFirestore(doc(db, 'todos', 'todo-id'))
 
   return (
-    <Switch fallback={<TodoList data={todos.data}>}>
+    <Switch>
       <Match when={todos.loading}>
         <div>Loading...</div>
       </Match>
       <Match when={todos.error}>
         <div>An error occurred.</div>
+      </Match>
+      <Match when={todos.data}>
+        <TodoList data={todos.data} />
       </Match>
     </Switch>
   )
