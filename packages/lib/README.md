@@ -33,9 +33,11 @@ render(
 
 All available hooks returns a [readonly proxy object](https://www.solidjs.com/docs/latest/api#createstore) with keys `loading`, `error` and `data`.
 
+If you want to access the firebase instance, you can use the [useFirebaseApp](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useFirebaseApp.tsx) hook.
+
 ### Authentication
 
-`useAuth` is a [Firebase Auth](https://firebase.google.com/docs/auth) binding to easily react to changes in the users' authentication status.
+[useAuth](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useAuth.tsx) is a [Firebase Auth](https://firebase.google.com/docs/auth) binding to easily react to changes in the users' authentication status.
 
 ```tsx
 import { Switch, Match } from 'solid-js'
@@ -71,7 +73,7 @@ const App = () => {
 
 ### Cloud Firestore
 
-`useFirestore` is a [Cloud Firestore](https://firebase.google.com/docs/firestore) binding that makes it straightforward to always keep your local data in sync with remotes databases.
+[useFirestore](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useFirestore.tsx) is a [Cloud Firestore](https://firebase.google.com/docs/firestore) binding that makes it straightforward to always keep your local data in sync with remotes databases.
 
 ```tsx
 import { Match, Switch } from 'solid-js'
@@ -103,7 +105,7 @@ const App = () => {
 
 ### Realtime Database
 
-`useDatabase` is a [Realtime Database](https://firebase.google.com/docs/database) binding that makes it straightforward to always keep your local data in sync with remotes databases.
+[useDatabase](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useDatabase.tsx) is a [Realtime Database](https://firebase.google.com/docs/database) binding that makes it straightforward to always keep your local data in sync with remotes databases.
 
 ```tsx
 import { Match, Switch } from 'solid-js'
@@ -132,7 +134,7 @@ const App = () => {
 
 ### Cloud Storage
 
-`useDownloadURL` is a hook that wraps the [getDownloadURL](https://firebase.google.com/docs/storage/web/download-files#download_data_via_url) method of [Cloud Storage](https://firebase.google.com/docs/storage).
+[useDownloadURL](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useDownloadURL.tsx) is a hook that wraps the [getDownloadURL](https://firebase.google.com/docs/storage/web/download-files#download_data_via_url) method of [Cloud Storage](https://firebase.google.com/docs/storage).
 
 ```tsx
 import { Match, Switch } from 'solid-js'
