@@ -97,6 +97,35 @@ const App = () => {
 }
 ```
 
+## Realtime Database
+
+`useDatabase` is a [Realtime Database](https://firebase.google.com/docs/database) binding that makes it straightforward to always keep your local data in sync with remotes databases.
+
+```tsx
+import { Match, Switch } from 'solid-js'
+import { getDatabase, ref } from 'firebase/database'
+import { useDatabase } from 'solid-firebase'
+
+const App = () => {
+  const db = getDatabase()
+  const todos = useDatabase(ref(db, 'todos'))
+
+  return (
+    <Switch>
+      <Match when={todos.loading}>
+        <p>Loading...</p>
+      </Match>
+      <Match when={todos.error}>
+        <p>An error occurred.</p>
+      </Match>
+      <Match when={todos.data}>
+        <TodoList data={todos.data} />
+      </Match>
+    </Switch>
+  )
+}
+```
+
 ## Cloud Storage
 
 `useDownloadURL` is a hook that wraps the [getDownloadURL](https://firebase.google.com/docs/storage/web/download-files#download_data_via_url) method of [Cloud Storage](https://firebase.google.com/docs/storage).
