@@ -31,7 +31,7 @@ render(
 
 ## Hooks
 
-All available hooks returns a [readonly proxy object](https://www.solidjs.com/docs/latest/api#createstore) with keys `loading`, `error` and `data`.
+All available hooks returns a [readonly proxy object](https://www.solidjs.com/docs/latest/api#createstore) with keys `loading`, `error` and `data`. Do not destructure as it will lose reactivity.
 
 If you want to access the firebase instance, you can use the [useFirebaseApp](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useFirebaseApp.tsx) hook.
 
