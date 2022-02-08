@@ -31,7 +31,7 @@ render(
 
 ## Hooks
 
-All available hooks returns a readonly proxy object that contains the `loading` state, `error` state and `user` object.
+All available hooks returns a [readonly proxy object](https://www.solidjs.com/docs/latest/api#createstore) with keys `loading`, `error` and `data`.
 
 ### Authentication
 
