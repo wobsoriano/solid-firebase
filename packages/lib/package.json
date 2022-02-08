@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "name": "solid-firebase",
   "description": "Solid hooks for Firebase.",
   "type": "module",
