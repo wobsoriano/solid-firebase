@@ -31,6 +31,8 @@ render(
 
 ## Hooks
 
+All available hooks returns a readonly proxy object that contains the `loading` state, `error` state and `user` object.
+
 ### Authentication
 
 `useAuth` is a [Firebase Auth](https://firebase.google.com/docs/auth) binding to easily react to changes in the users' authentication status.
