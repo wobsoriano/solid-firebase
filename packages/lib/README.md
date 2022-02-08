@@ -29,7 +29,9 @@ render(
 )
 ```
 
-## Authentication
+## Hooks
+
+### Authentication
 
 `useAuth` is a [Firebase Auth](https://firebase.google.com/docs/auth) binding to easily react to changes in the users' authentication status.
 
@@ -65,7 +67,7 @@ const App = () => {
 }
 ```
 
-## Cloud Firestore
+### Cloud Firestore
 
 `useFirestore` is a [Cloud Firestore](https://firebase.google.com/docs/firestore) binding that makes it straightforward to always keep your local data in sync with remotes databases.
 
@@ -97,7 +99,7 @@ const App = () => {
 }
 ```
 
-## Realtime Database
+### Realtime Database
 
 `useDatabase` is a [Realtime Database](https://firebase.google.com/docs/database) binding that makes it straightforward to always keep your local data in sync with remotes databases.
 
@@ -126,7 +128,7 @@ const App = () => {
 }
 ```
 
-## Cloud Storage
+### Cloud Storage
 
 `useDownloadURL` is a hook that wraps the [getDownloadURL](https://firebase.google.com/docs/storage/web/download-files#download_data_via_url) method of [Cloud Storage](https://firebase.google.com/docs/storage).
 
