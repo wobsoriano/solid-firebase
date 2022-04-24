@@ -1,13 +1,13 @@
 # solid-firebase
 
-Solid hooks for Firebase.
+Solid primitives for Firebase.
 
 ## Quick start
 
 Install it:
 
 ```bash
-yarn add firebase solid-firebase
+pnpm add firebase solid-firebase # or npm or yarn
 ```
 
 Configure firebase app:
@@ -29,11 +29,11 @@ render(
 )
 ```
 
-## Hooks
+## Primitives
 
-All available hooks returns a [readonly proxy object](https://www.solidjs.com/docs/latest/api#createstore) with keys `loading`, `error` and `data`. Do not destructure as it will lose reactivity.
+All available primitives returns a [readonly proxy object](https://www.solidjs.com/docs/latest/api#createstore) with keys `loading`, `error` and `data`. Do not destructure as it will lose reactivity.
 
-If you want to access the firebase instance, you can use the [useFirebaseApp](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useFirebaseApp.tsx) hook.
+If you want to access the firebase instance, you can use the [useFirebaseApp](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useFirebaseApp.tsx) primitive.
 
 ### Authentication
 
