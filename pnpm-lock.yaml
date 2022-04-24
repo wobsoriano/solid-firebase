@@ -37,8 +37,8 @@ importers:
     specifiers:
       bumpp: ^7.1.1
       firebase: ^9.6.11
-      rollup: ^2.58.0
-      rollup-preset-solid: ^1.0.1
+      rollup: ^2.70.2
+      rollup-preset-solid: ^1.4.0
       solid-js: ^1.3.16
       typescript: ^4.5.5
     dependencies:

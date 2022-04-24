@@ -38,8 +38,8 @@
   },
   "devDependencies": {
     "bumpp": "^7.1.1",
-    "rollup": "^2.58.0",
-    "rollup-preset-solid": "^1.0.1",
+    "rollup": "^2.70.2",
+    "rollup-preset-solid": "^1.4.0",
     "typescript": "^4.5.5"
   }
 }
