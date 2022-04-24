@@ -1,11 +1,15 @@
 {
-  "version": "0.1.2",
   "name": "solid-firebase",
-  "description": "Solid hooks for Firebase.",
   "type": "module",
-  "files": [
-    "dist"
-  ],
+  "version": "0.1.2",
+  "description": "Solid hooks for Firebase.",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Robert Soriano",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wobsoriano/solid-firebase.git"
+  },
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
@@ -15,18 +19,19 @@
       "default": "./dist/esm/index.js"
     }
   },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "yarn build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wobsoriano/solid-firebase.git"
-  },
-  "keywords": [],
-  "author": "Robert Soriano",
-  "license": "MIT",
   "homepage": "https://github.com/wobsoriano/solid-firebase#readme",
+  "peerDependencies": {
+    "firebase": ">= 9.0.0",
+    "solid-js": ">= 1.0.0"
+  },
   "dependencies": {
     "firebase": "^9.6.6",
     "solid-js": "^1.1.7"
@@ -34,11 +39,6 @@
   "devDependencies": {
     "rollup": "^2.58.0",
     "rollup-preset-solid": "^1.0.1",
-    "typescript": "^4.4.4"
-  },
-  "peerDependencies": {
-    "solid-js": ">= 1.0.0",
-    "firebase": ">= 9.0.0"
-  },
-  "sideEffects": false
+    "typescript": "^4.5.5"
+  }
 }

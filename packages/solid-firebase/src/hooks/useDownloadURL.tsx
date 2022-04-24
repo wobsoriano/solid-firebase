@@ -1,6 +1,6 @@
-import type { StorageReference } from 'firebase/storage';
-import { getDownloadURL } from 'firebase/storage';
-import { createStore, reconcile } from 'solid-js/store';
+import type { StorageReference } from 'firebase/storage'
+import { getDownloadURL } from 'firebase/storage'
+import { createStore, reconcile } from 'solid-js/store'
 
 /**
  * Convenience listeners for files stored within Firebase Cloud Storage.
@@ -9,14 +9,14 @@ import { createStore, reconcile } from 'solid-js/store';
  */
 export function useDownloadURL(storageRef: StorageReference) {
   const [state, setState] = createStore<{
-    loading: boolean;
-    error: Error | undefined;
-    data: string | undefined;
+    loading: boolean
+    error: Error | undefined
+    data: string | undefined
   }>({
     loading: true,
     error: undefined,
     data: undefined,
-  });
+  })
 
   getDownloadURL(storageRef)
     .then((url) => {
@@ -26,7 +26,7 @@ export function useDownloadURL(storageRef: StorageReference) {
           error: undefined,
           data: url,
         }),
-      );
+      )
     })
     .catch((error) => {
       setState(
@@ -35,8 +35,8 @@ export function useDownloadURL(storageRef: StorageReference) {
           error,
           data: undefined,
         }),
-      );
-    });
+      )
+    })
 
-  return state;
+  return state
 }

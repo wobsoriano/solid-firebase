@@ -1,7 +1,7 @@
-import type { Auth, User } from 'firebase/auth';
-import { onIdTokenChanged } from 'firebase/auth';
-import { onCleanup } from 'solid-js';
-import { createStore, reconcile } from 'solid-js/store';
+import type { Auth, User } from 'firebase/auth'
+import { onIdTokenChanged } from 'firebase/auth'
+import { onCleanup } from 'solid-js'
+import { createStore, reconcile } from 'solid-js/store'
 
 /**
  * Provides a convenience listener for Firebase Auth's auth state.
@@ -10,14 +10,14 @@ import { createStore, reconcile } from 'solid-js/store';
  */
 export function useAuth(auth: Auth) {
   const [state, setState] = createStore<{
-    loading: boolean;
-    data: User | null;
-    error: Error | null;
+    loading: boolean
+    data: User | null
+    error: Error | null
   }>({
     loading: true,
     data: null,
     error: null,
-  });
+  })
 
   const unsub = onIdTokenChanged(
     auth,
@@ -28,7 +28,7 @@ export function useAuth(auth: Auth) {
           data: authUser,
           error: null,
         }),
-      );
+      )
     },
     (error) => {
       setState(
@@ -37,11 +37,11 @@ export function useAuth(auth: Auth) {
           data: null,
           error,
         }),
-      );
+      )
     },
-  );
+  )
 
-  onCleanup(unsub);
+  onCleanup(unsub)
 
-  return state;
+  return state
 }

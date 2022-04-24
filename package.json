@@ -1,15 +1,16 @@
 {
   "name": "monorepo",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "lib": "yarn workspace solid-firebase",
-    "demo": "yarn workspace demo",
-    "build:lib": "yarn lib build",
-    "build:demo": "yarn demo build",
-    "clean:modules": "rm -rf node_modules && rm -rf packages/lib/node_modules && rm -rf packages/demo/node_modules",
-    "copy:readme": "cp README.md packages/lib/README.md"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config-ts": "^0.20.6",
+    "eslint": "^8.13.0",
+    "eslint-plugin-solid": "^0.4.4",
+    "firebase": "^9.6.6",
+    "solid-js": "^1.1.7",
+    "typescript": "^4.5.5"
   }
 }

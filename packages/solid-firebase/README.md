@@ -17,7 +17,7 @@ import { render } from 'solid-js/web'
 import { FirebaseProvider } from 'solid-firebase'
 import App from './App'
 
-const firebaseConfig = {...}
+const firebaseConfig = {}
 
 render(
   () => (
@@ -40,7 +40,7 @@ If you want to access the firebase instance, you can use the [useFirebaseApp](ht
 [useAuth](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useAuth.tsx) is a [Firebase Auth](https://firebase.google.com/docs/auth) binding to easily react to changes in the users' authentication status.
 
 ```tsx
-import { Switch, Match } from 'solid-js'
+import { Match, Switch } from 'solid-js'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
 import { useAuth } from 'solid-firebase'
 
