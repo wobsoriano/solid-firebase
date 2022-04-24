@@ -9,8 +9,8 @@
     "@antfu/eslint-config-ts": "^0.20.6",
     "eslint": "^8.13.0",
     "eslint-plugin-solid": "^0.4.4",
-    "firebase": "^9.6.6",
-    "solid-js": "^1.1.7",
+    "firebase": "^9.6.11",
+    "solid-js": "^1.3.16",
     "typescript": "^4.5.5"
   }
 }
