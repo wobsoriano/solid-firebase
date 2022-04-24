@@ -25,7 +25,8 @@
   "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
-    "prepublishOnly": "yarn build"
+    "release": "bumpp --commit --push --tag && pnpm publish",
+    "prepublishOnly": "pnpm build"
   },
   "homepage": "https://github.com/wobsoriano/solid-firebase#readme",
   "peerDependencies": {
