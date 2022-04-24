@@ -1,0 +1,1 @@
+packages/solid-firebase/README.md
