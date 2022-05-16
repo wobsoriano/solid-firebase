@@ -7,6 +7,7 @@ export const FirebaseContext = createContext<FirebaseApp>()
 
 interface Props {
   config: FirebaseOptions
+  children: Element
 }
 
 export const FirebaseProvider: Component<Props> = (props) => {
