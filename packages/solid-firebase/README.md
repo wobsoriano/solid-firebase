@@ -21,7 +21,7 @@ const firebaseConfig = {}
 
 render(
   () => (
-    <FirebaseProvider config={config}>
+    <FirebaseProvider config={firebaseConfig}>
       <App />
     </FirebaseProvider>
   ),
