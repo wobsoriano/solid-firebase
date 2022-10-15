@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "solid-firebase": "workspace:*",
-    "solid-js": "^1.3.16"
+    "solid-js": "^1.5.7"
   },
   "devDependencies": {
     "typescript": "^4.5.5",
