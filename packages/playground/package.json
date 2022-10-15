@@ -10,6 +10,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "firebase": "^9.12.1",
     "solid-firebase": "workspace:*",
     "solid-js": "^1.5.7"
   },
