@@ -31,9 +31,7 @@ render(
 
 ## Primitives
 
-All available primitives returns a [readonly proxy object](https://www.solidjs.com/docs/latest/api#createstore) with keys `loading`, `error` and `data`. Do not destructure as it will lose reactivity.
-
-If you want to access the firebase instance, you can use the [useFirebaseApp](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useFirebaseApp.tsx) primitive.
+The primitive [useFirebaseApp](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useFirebaseApp.tsx) gives you access to the initialized firebase app.
 
 ### Authentication
 
@@ -42,17 +40,19 @@ If you want to access the firebase instance, you can use the [useFirebaseApp](ht
 ```tsx
 import { Match, Switch } from 'solid-js'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
-import { useAuth } from 'solid-firebase'
+import { useAuth, useFirebaseApp } from 'solid-firebase'
 
 const Login = () => {
-  const auth = getAuth()
+  const app = useFirebaseApp()
+  const auth = getAuth(app)
   const signIn = () => signInWithPopup(auth, new GoogleAuthProvider())
 
   return <button onClick={signIn}>Sign In with Google</button>
 }
 
 const App = () => {
-  const auth = getAuth()
+  const app = useFirebaseApp()
+  const auth = getAuth(app)
   const state = useAuth(auth)
 
   return (
@@ -78,10 +78,11 @@ const App = () => {
 ```tsx
 import { Match, Switch } from 'solid-js'
 import { collection, getFirestore } from 'firebase/firestore'
-import { useFirestore } from 'solid-firebase'
+import { useFirebaseApp, useFirestore } from 'solid-firebase'
 
 const App = () => {
-  const db = getFirestore()
+  const app = useFirebaseApp()
+  const db = getFirestore(app)
   const todos = useFirestore(collection(db, 'todos'))
 
   // or for doc reference
@@ -110,10 +111,11 @@ const App = () => {
 ```tsx
 import { Match, Switch } from 'solid-js'
 import { getDatabase, ref } from 'firebase/database'
-import { useDatabase } from 'solid-firebase'
+import { useDatabase, useFirebaseApp } from 'solid-firebase'
 
 const App = () => {
-  const db = getDatabase()
+  const app = useFirebaseApp()
+  const db = getDatabase(app)
   const todos = useDatabase(ref(db, 'todos'))
 
   return (
@@ -139,10 +141,11 @@ const App = () => {
 ```tsx
 import { Match, Switch } from 'solid-js'
 import { getStorage, ref } from 'firebase/storage'
-import { useDownloadURL } from 'solid-firebase'
+import { useDownloadURL, useFirebaseApp } from 'solid-firebase'
 
 const App = () => {
-  const storage = getStorage()
+  const app = useFirebaseApp()
+  const storage = getStorage(app)
   const state = useDownloadURL(ref(
     storage,
     'images/yourimage.jpg',
@@ -166,4 +169,4 @@ const App = () => {
 
 ## License
 
-MIT License © 2022 [Robert Soriano](https://github.com/wobsoriano)
+MIT
