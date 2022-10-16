@@ -2,12 +2,14 @@
 
 Solid primitives for Firebase.
 
+⚠️ This package only work with [Firebase 9 or above with the modular style]
+
 ## Quick start
 
 Install it:
 
 ```bash
-pnpm add firebase solid-firebase # or npm or yarn
+npm install firebase solid-firebase
 ```
 
 Configure firebase app:
