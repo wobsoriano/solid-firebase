@@ -44,16 +44,14 @@ import { useAuth, useFirebaseApp } from 'solid-firebase'
 
 const Login = () => {
   const app = useFirebaseApp()
-  const auth = getAuth(app)
-  const signIn = () => signInWithPopup(auth, new GoogleAuthProvider())
+  const signIn = () => signInWithPopup(getAuth(app), new GoogleAuthProvider())
 
   return <button onClick={signIn}>Sign In with Google</button>
 }
 
 const App = () => {
   const app = useFirebaseApp()
-  const auth = getAuth(app)
-  const state = useAuth(auth)
+  const state = useAuth(getAuth(app))
 
   return (
     <Switch>
