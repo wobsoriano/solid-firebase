@@ -29,7 +29,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
-    "release": "bumpp --commit --push --tag && pnpm publish",
+    "release": "bumpp --commit --push --tag && npm publish",
     "prepublishOnly": "pnpm build"
   },
   "homepage": "https://github.com/wobsoriano/solid-firebase#readme",
