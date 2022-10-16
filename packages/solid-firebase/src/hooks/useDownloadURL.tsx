@@ -10,12 +10,12 @@ import { createStore, reconcile } from 'solid-js/store'
 export function useDownloadURL(storageRef: StorageReference) {
   const [state, setState] = createStore<{
     loading: boolean
-    error: Error | undefined
-    data: string | undefined
+    error: Error | null
+    data: string | null
   }>({
     loading: true,
-    error: undefined,
-    data: undefined,
+    error: null,
+    data: null,
   })
 
   getDownloadURL(storageRef)
@@ -23,7 +23,7 @@ export function useDownloadURL(storageRef: StorageReference) {
       setState(
         reconcile({
           loading: false,
-          error: undefined,
+          error: null,
           data: url,
         }),
       )
@@ -33,7 +33,7 @@ export function useDownloadURL(storageRef: StorageReference) {
         reconcile({
           loading: false,
           error,
-          data: undefined,
+          data: null,
         }),
       )
     })

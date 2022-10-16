@@ -12,12 +12,12 @@ import type { DatabaseReference } from 'firebase/database'
 export function useDatabase<T = any>(docRef: DatabaseReference) {
   const [state, setState] = createStore<{
     loading: boolean
-    error: Error | undefined
-    data: T | undefined
+    error: Error | null
+    data: T | null
   }>({
     loading: true,
-    error: undefined,
-    data: undefined,
+    error: null,
+    data: null,
   })
 
   const close = onValue(
@@ -27,7 +27,7 @@ export function useDatabase<T = any>(docRef: DatabaseReference) {
         reconcile({
           loading: false,
           data: snapshot.val(),
-          error: undefined,
+          error: null,
         }),
       )
     },
@@ -35,7 +35,7 @@ export function useDatabase<T = any>(docRef: DatabaseReference) {
       setState(
         reconcile({
           loading: false,
-          data: undefined,
+          data: null,
           error,
         }),
       )
