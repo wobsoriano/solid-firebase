@@ -2,7 +2,7 @@
 
 Solid primitives for Firebase.
 
-⚠️ This package only works with [Firebase 9 or above with the modular style](https://firebase.google.com/docs/web/modular-upgrade).
+> ⚠️ This package only works with [Firebase 9 or above with the modular style](https://firebase.google.com/docs/web/modular-upgrade).
 
 ## Quick start
 
