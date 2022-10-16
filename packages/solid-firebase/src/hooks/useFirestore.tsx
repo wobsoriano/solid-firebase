@@ -83,6 +83,7 @@ export function useFirestore<T extends DocumentData>(
           reconcile({
             loading: false,
             data: getData(snapshot) || null,
+            error: null,
           }),
         )
       },
@@ -90,6 +91,7 @@ export function useFirestore<T extends DocumentData>(
         setState(
           reconcile({
             loading: false,
+            data: null,
             error,
           }),
         )
@@ -116,6 +118,7 @@ export function useFirestore<T extends DocumentData>(
         reconcile({
           loading: false,
           data: querySnapshot.docs.map(getData).filter(isDefined),
+          error: null,
         }),
       )
     },
@@ -123,6 +126,7 @@ export function useFirestore<T extends DocumentData>(
       setState(
         reconcile({
           loading: false,
+          data: null,
           error,
         }),
       )
