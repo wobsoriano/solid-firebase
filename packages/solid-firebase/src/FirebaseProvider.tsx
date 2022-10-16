@@ -11,6 +11,7 @@ interface Props {
 }
 
 export const FirebaseProvider: Component<Props> = (props) => {
+  // eslint-disable-next-line solid/reactivity
   const app = initializeApp(props.config)
 
   return <FirebaseContext.Provider value={app}>{props.children}</FirebaseContext.Provider>
