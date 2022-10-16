@@ -14,7 +14,7 @@ export function useAuth(auth: Auth) {
     data: User | null
     error: Error | null
   }>({
-    loading: auth.currentUser == null,
+    loading: auth.currentUser === null,
     data: auth.currentUser,
     error: null,
   })
