@@ -1,7 +1,7 @@
-import { onCleanup } from 'solid-js'
-import { createStore, reconcile } from 'solid-js/store'
-import { onValue } from 'firebase/database'
-import type { DatabaseReference } from 'firebase/database'
+import { onCleanup } from "solid-js";
+import { createStore, reconcile } from "solid-js/store";
+import { onValue } from "firebase/database";
+import type { DatabaseReference } from "firebase/database";
 
 /**
  * Provides convenience listeners for lists and values
@@ -11,14 +11,14 @@ import type { DatabaseReference } from 'firebase/database'
  */
 export function useDatabase<T = any>(docRef: DatabaseReference) {
   const [state, setState] = createStore<{
-    loading: boolean
-    error: Error | null
-    data: T | null
+    loading: boolean;
+    error: Error | null;
+    data: T | null;
   }>({
     loading: true,
     error: null,
     data: null,
-  })
+  });
 
   const close = onValue(
     docRef,
@@ -28,8 +28,8 @@ export function useDatabase<T = any>(docRef: DatabaseReference) {
           loading: false,
           data: snapshot.val(),
           error: null,
-        }),
-      )
+        })
+      );
     },
     (error) => {
       setState(
@@ -37,14 +37,14 @@ export function useDatabase<T = any>(docRef: DatabaseReference) {
           loading: false,
           data: null,
           error,
-        }),
-      )
-    },
-  )
+        })
+      );
+    }
+  );
 
   onCleanup(() => {
-    close()
-  })
+    close();
+  });
 
-  return state
+  return state;
 }

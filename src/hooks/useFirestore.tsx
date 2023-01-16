@@ -5,58 +5,58 @@ import type {
   FirestoreError,
   Query,
   QueryDocumentSnapshot,
-} from 'firebase/firestore'
-import { onSnapshot } from 'firebase/firestore'
-import { onCleanup } from 'solid-js'
-import { createStore, reconcile } from 'solid-js/store'
+} from "firebase/firestore";
+import { onSnapshot } from "firebase/firestore";
+import { onCleanup } from "solid-js";
+import { createStore, reconcile } from "solid-js/store";
 
-export type FirebaseDocRef<T> = Query<T> | DocumentReference<T>
+export type FirebaseDocRef<T> = Query<T> | DocumentReference<T>;
 
 function getData<T>(docRef: DocumentSnapshot<T> | QueryDocumentSnapshot<T>) {
-  const data = docRef.data()
+  const data = docRef.data();
 
   if (data) {
-    Object.defineProperty(data, 'id', {
+    Object.defineProperty(data, "id", {
       value: docRef.id.toString(),
       writable: false,
-    })
+    });
   }
 
-  return data
+  return data;
 }
 
 function isDocumentReference<T>(docRef: any): docRef is DocumentReference<T> {
-  return (docRef.path?.match(/\//g) || []).length % 2 !== 0
+  return (docRef.path?.match(/\//g) || []).length % 2 !== 0;
 }
 
 function isDefined<T = any>(val?: T): val is T {
-  return typeof val !== 'undefined'
+  return typeof val !== "undefined";
 }
 
 interface UseFireStoreReturn<T> {
-  data: T
-  loading: boolean
-  error: FirestoreError | null
+  data: T;
+  loading: boolean;
+  error: FirestoreError | null;
 }
 
 export function useFirestore<T extends DocumentData>(
   docRef: DocumentReference<T>,
   initialValue: T
-): UseFireStoreReturn<T | null>
+): UseFireStoreReturn<T | null>;
 export function useFirestore<T extends DocumentData>(
   docRef: Query<T>,
   initialValue: T[]
-): UseFireStoreReturn<T[]>
+): UseFireStoreReturn<T[]>;
 
 // nullable initial values
 export function useFirestore<T extends DocumentData>(
   docRef: DocumentReference<T>,
   initialValue?: T | undefined
-): UseFireStoreReturn<T | undefined | null>
+): UseFireStoreReturn<T | undefined | null>;
 export function useFirestore<T extends DocumentData>(
   docRef: Query<T>,
   initialValue?: T[]
-): UseFireStoreReturn<T[] | undefined>
+): UseFireStoreReturn<T[] | undefined>;
 
 /**
  * Provides convenience listeners for Collections and
@@ -67,14 +67,14 @@ export function useFirestore<T extends DocumentData>(
  */
 export function useFirestore<T extends DocumentData>(
   docRef: FirebaseDocRef<T>,
-  initialValue: any = undefined,
+  initialValue: any = undefined
 ) {
   if (isDocumentReference<T>(docRef)) {
     const [state, setState] = createStore<UseFireStoreReturn<T | null>>({
       data: initialValue,
       loading: true,
       error: null,
-    })
+    });
 
     const close = onSnapshot(
       docRef,
@@ -84,8 +84,8 @@ export function useFirestore<T extends DocumentData>(
             loading: false,
             data: getData(snapshot) || null,
             error: null,
-          }),
-        )
+          })
+        );
       },
       (error) => {
         setState(
@@ -93,23 +93,23 @@ export function useFirestore<T extends DocumentData>(
             loading: false,
             data: null,
             error,
-          }),
-        )
-      },
-    )
+          })
+        );
+      }
+    );
 
     onCleanup(() => {
-      close()
-    })
+      close();
+    });
 
-    return state
+    return state;
   }
 
   const [state, setState] = createStore({
     data: initialValue,
     loading: true,
     error: null as FirestoreError | null,
-  })
+  });
 
   const close = onSnapshot(
     docRef,
@@ -119,8 +119,8 @@ export function useFirestore<T extends DocumentData>(
           loading: false,
           data: querySnapshot.docs.map(getData).filter(isDefined),
           error: null,
-        }),
-      )
+        })
+      );
     },
     (error) => {
       setState(
@@ -128,14 +128,14 @@ export function useFirestore<T extends DocumentData>(
           loading: false,
           data: null,
           error,
-        }),
-      )
-    },
-  )
+        })
+      );
+    }
+  );
 
   onCleanup(() => {
-    close()
-  })
+    close();
+  });
 
-  return state
+  return state;
 }
