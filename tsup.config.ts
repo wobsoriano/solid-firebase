@@ -1,9 +1,10 @@
-import { defineConfig, Options } from 'tsup'
+import type { Options } from 'tsup'
+import { defineConfig } from 'tsup'
 import { solidPlugin } from 'esbuild-plugin-solid'
 
-type CustomEntry = { readonly dev: boolean; readonly solid: boolean }
+interface CustomEntry { readonly dev: boolean; readonly solid: boolean }
 
-export default defineConfig(config => {
+export default defineConfig((config) => {
   const watching = !!config.watch
   const inputFilename = 'src/index.tsx'
 
@@ -29,21 +30,23 @@ export default defineConfig(config => {
       esbuildOptions(options) {
         options.define = {
           ...options.define,
-          'process.env.NODE_ENV': dev ? `"development"` : `"production"`,
+          'process.env.NODE_ENV': dev ? '"development"' : '"production"',
           'process.env.PROD': dev ? 'false' : 'true',
           'process.env.DEV': dev ? 'true' : 'false',
-          'import.meta.env.NODE_ENV': dev ? `"development"` : `"production"`,
+          'import.meta.env.NODE_ENV': dev ? '"development"' : '"production"',
           'import.meta.env.PROD': dev ? 'false' : 'true',
           'import.meta.env.DEV': dev ? 'true' : 'false',
         }
         options.jsx = 'preserve'
 
-        if (!dev) options.drop = ['console', 'debugger']
+        if (!dev)
+          options.drop = ['console', 'debugger']
 
         return options
       },
       outExtension: ({ format }) => {
-        if (format === 'esm' && solid) return { js: '.jsx' }
+        if (format === 'esm' && solid)
+          return { js: '.jsx' }
         return {}
       },
       esbuildPlugins: !solid ? [solidPlugin() as any] : undefined,
