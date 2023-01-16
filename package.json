@@ -1,28 +1,25 @@
 {
-  "version": "0.1.7",
   "name": "solid-firebase",
+  "type": "module",
+  "version": "0.1.7",
+  "private": false,
+  "packageManager": "pnpm@7.20.0",
   "description": "Solid primitives for Firebase.",
-  "license": "MIT",
   "author": "wobsoriano",
+  "license": "MIT",
   "contributors": [],
+  "homepage": "https://github.com/wobsoriano/solid-firebase#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wobsoriano/solid-firebase.git"
   },
-  "homepage": "https://github.com/wobsoriano/solid-firebase#readme",
   "bugs": {
     "url": "https://github.com/wobsoriano/solid-firebase/issues"
   },
-  "files": [
-    "dist"
+  "keywords": [
+    "solid"
   ],
-  "private": false,
   "sideEffects": false,
-  "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "browser": {},
   "exports": {
     "solid": {
       "development": "./dist/index.dev.solid.jsx",
@@ -30,19 +27,26 @@
     },
     "browser": {
       "development": {
-        "import": "./dist/index.dev.js",
-        "require": "./dist/index.dev.cjs"
+        "require": "./dist/index.dev.cjs",
+        "import": "./dist/index.dev.js"
       },
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
     },
     "development": {
-      "import": "./dist/index.dev.js",
-      "require": "./dist/index.dev.cjs"
+      "require": "./dist/index.dev.cjs",
+      "import": "./dist/index.dev.js"
     },
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.js"
   },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "browser": {},
   "scripts": {
     "dev": "vite serve dev",
     "test": "echo \"test not setup\"",
@@ -72,9 +76,5 @@
     "typescript": "^4.9.4",
     "vite": "^4.0.4",
     "vite-plugin-solid": "^2.5.0"
-  },
-  "keywords": [
-    "solid"
-  ],
-  "packageManager": "pnpm@7.20.0"
+  }
 }
