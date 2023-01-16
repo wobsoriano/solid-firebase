@@ -50,20 +50,22 @@
     "lint": "eslint .",
     "prepublishOnly": "pnpm build",
     "format": "prettier --ignore-path .gitignore -w \"src/**/*.{js,ts,json,css,tsx,jsx}\" \"dev/**/*.{js,ts,json,css,tsx,jsx}\"",
+    "release": "bumpp && pnpm publish",
     "update-deps": "pnpm up -Li",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "solid-js": ">=1.6.0",
-    "firebase": ">=9.0.0"
+    "firebase": ">=9.0.0",
+    "solid-js": ">=1.6.0"
   },
   "devDependencies": {
-    "eslint": "^8.32.0",
     "@antfu/eslint-config-ts": "^0.34.1",
-    "eslint-plugin-solid": "^0.9.3",
-    "firebase": "^9.15.0",
+    "bumpp": "^8.2.1",
     "esbuild": "^0.17.0",
     "esbuild-plugin-solid": "^0.4.2",
+    "eslint": "^8.32.0",
+    "eslint-plugin-solid": "^0.9.3",
+    "firebase": "^9.15.0",
     "prettier": "2.8.3",
     "solid-js": "^1.6.9",
     "tsup": "^6.5.0",
