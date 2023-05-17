@@ -1,7 +1,7 @@
 import { useContext } from 'solid-js'
 import { FirebaseContext } from '../FirebaseProvider'
 
-export const useFirebaseApp = () => {
+export function useFirebaseApp() {
   const ctx = useContext(FirebaseContext)
 
   if (!ctx) {
