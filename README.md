@@ -48,14 +48,14 @@ import { Match, Switch } from 'solid-js'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
 import { useAuth, useFirebaseApp } from 'solid-firebase'
 
-const Login = () => {
+function Login() {
   const app = useFirebaseApp()
   const signIn = () => signInWithPopup(getAuth(app), new GoogleAuthProvider())
 
   return <button onClick={signIn}>Sign In with Google</button>
 }
 
-const App = () => {
+function App() {
   const app = useFirebaseApp()
   const state = useAuth(getAuth(app))
 
@@ -84,7 +84,7 @@ import { Match, Switch } from 'solid-js'
 import { collection, getFirestore } from 'firebase/firestore'
 import { useFirebaseApp, useFirestore } from 'solid-firebase'
 
-const App = () => {
+function App() {
   const app = useFirebaseApp()
   const db = getFirestore(app)
   const todos = useFirestore(collection(db, 'todos'))
@@ -117,7 +117,7 @@ import { Match, Switch } from 'solid-js'
 import { getDatabase, ref } from 'firebase/database'
 import { useDatabase, useFirebaseApp } from 'solid-firebase'
 
-const App = () => {
+function App() {
   const app = useFirebaseApp()
   const db = getDatabase(app)
   const todos = useDatabase(ref(db, 'todos'))
@@ -147,7 +147,7 @@ import { Match, Switch } from 'solid-js'
 import { getStorage, ref } from 'firebase/storage'
 import { useDownloadURL, useFirebaseApp } from 'solid-firebase'
 
-const App = () => {
+function App() {
   const app = useFirebaseApp()
   const storage = getStorage(app)
   const state = useDownloadURL(ref(
