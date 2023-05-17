@@ -1,29 +1,24 @@
-import type { Component } from 'solid-js'
-import { Hello } from '../src'
-import logo from './logo.svg'
-import styles from './App.module.css'
+import { Match, Switch } from 'solid-js'
+import { collection, getFirestore } from 'firebase/firestore'
+import { useFirebaseApp, useFirestore } from '../src'
 
-const App: Component = () => {
+function App() {
+  const app = useFirebaseApp()
+  const db = getFirestore(app)
+  const notes = useFirestore(collection(db, 'notes'))
+
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <h1>
-          <Hello />
-        </h1>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Match when={notes.loading}>
+        <p>Loading...</p>
+      </Match>
+      <Match when={notes.error}>
+        <p>An error occurred.</p>
+      </Match>
+      <Match when={notes.data}>
+        { JSON.stringify(notes.data) }
+      </Match>
+    </Switch>
   )
 }
 

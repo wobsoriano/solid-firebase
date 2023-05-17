@@ -22,31 +22,30 @@
   "sideEffects": false,
   "exports": {
     "solid": {
-      "development": "./dist/index.dev.solid.jsx",
-      "import": "./dist/index.solid.jsx"
-    },
-    "browser": {
-      "development": {
-        "require": "./dist/index.dev.cjs",
-        "import": "./dist/index.dev.js"
-      },
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "development": "./dist/dev.jsx",
+      "import": "./dist/index.jsx"
     },
     "development": {
-      "require": "./dist/index.dev.cjs",
-      "import": "./dist/index.dev.js"
+      "require": "./dist/dev.cjs",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/dev.js"
+      }
     },
     "require": "./dist/index.cjs",
-    "import": "./dist/index.js"
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "browser": {},
+  "typesVersions": {},
   "files": [
     "dist"
   ],
-  "browser": {},
   "scripts": {
     "dev": "vite serve dev",
     "test": "echo \"test not setup\"",

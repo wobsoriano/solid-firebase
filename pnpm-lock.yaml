@@ -28,6 +28,9 @@ devDependencies:
   tsup:
     specifier: ^6.7.0
     version: 6.7.0(typescript@5.0.4)
+  tsup-preset-solid:
+    specifier: ^0.1.8
+    version: 0.1.8(esbuild@0.17.19)(solid-js@1.7.5)(tsup@6.7.0)(typescript@5.0.4)
   typescript:
     specifier: ^5.0.4
     version: 5.0.4
@@ -4142,6 +4145,21 @@ packages:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
     dev: true
 
+  /tsup-preset-solid@0.1.8(esbuild@0.17.19)(solid-js@1.7.5)(tsup@6.7.0)(typescript@5.0.4):
+    resolution: {integrity: sha512-V5TZFEZY9emACO3AZvKyCRzdoyjUcuMEEbTGcJnCma7OVvGnSNVoewFff9g0CaveJ8cZcC3u2tW9gMaxmPZ71A==}
+    peerDependencies:
+      tsup: ^6.5.0
+    dependencies:
+      esbuild-plugin-solid: 0.5.0(esbuild@0.17.19)(solid-js@1.7.5)
+      tsup: 6.7.0(typescript@5.0.4)
+      type-fest: 3.10.0(typescript@5.0.4)
+    transitivePeerDependencies:
+      - esbuild
+      - solid-js
+      - supports-color
+      - typescript
+    dev: true
+
   /tsup@6.7.0(typescript@5.0.4):
     resolution: {integrity: sha512-L3o8hGkaHnu5TdJns+mCqFsDBo83bJ44rlK7e6VdanIvpea4ArPcU3swWGsLVbXak1PqQx/V+SSmFPujBK+zEQ==}
     engines: {node: '>=14.18'}
@@ -4213,6 +4231,15 @@ packages:
   /type-fest@0.8.1:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
     engines: {node: '>=8'}
+    dev: true
+
+  /type-fest@3.10.0(typescript@5.0.4):
+    resolution: {integrity: sha512-hmAPf1datm+gt3c2mvu0sJyhFy6lTkIGf0GzyaZWxRLnabQfPUqg6tF95RPg6sLxKI7nFLGdFxBcf2/7+GXI+A==}
+    engines: {node: '>=14.16'}
+    peerDependencies:
+      typescript: '>=4.7.0'
+    dependencies:
+      typescript: 5.0.4
     dev: true
 
   /typed-array-length@1.0.4:

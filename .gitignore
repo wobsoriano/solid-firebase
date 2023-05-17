@@ -3,4 +3,5 @@ dist
 gitignore
 
 # VSC Settings
-.vscode/settings.json
+.vscode
+.env
