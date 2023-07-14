@@ -1,6 +1,6 @@
 import { Match, Switch, createMemo, createSignal } from 'solid-js'
 import { doc, getFirestore } from 'firebase/firestore'
-import { useFirebaseApp, useFirestore } from '../src'
+import { useFirebaseApp, useFirestoreOnce } from '../src'
 
 function App() {
   const app = useFirebaseApp()
@@ -8,7 +8,7 @@ function App() {
   // const notes = useFirestore(collection(db, 'notes'))
   const [noteId, setNoteId] = createSignal('3HfgcVNvO4n1AF2uCpLn')
   const docComputed = createMemo(() => doc(db, 'notes', noteId()))
-  const note = useFirestore(docComputed)
+  const note = useFirestoreOnce(docComputed)
 
   return (
     <>
@@ -19,8 +19,8 @@ function App() {
         <Match when={note.error}>
           <p>An error occurred.</p>
         </Match>
-        <Match when={note.data}>
-          <p>{note.data?.title}</p>
+        <Match when={note()}>
+          <p>{note()?.title}</p>
         </Match>
       </Switch>
       <button onClick={() => {
