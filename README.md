@@ -28,7 +28,7 @@ const app = initializeApp({ projectId: 'MY PROJECT ID' })
 
 render(
   () => (
-    <FirebaseProvider config={app}>
+    <FirebaseProvider app={app}>
       <App />
     </FirebaseProvider>
   ),

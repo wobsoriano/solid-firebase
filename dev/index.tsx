@@ -1,4 +1,5 @@
 import { render } from 'solid-js/web'
+import { initializeApp } from 'firebase/app'
 import { FirebaseProvider } from '../src'
 import './styles.css'
 
@@ -13,9 +14,11 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 }
 
+const app = initializeApp(firebaseConfig)
+
 render(
   () => (
-    <FirebaseProvider config={firebaseConfig}>
+    <FirebaseProvider app={app}>
       <App />
     </FirebaseProvider>
   ),
