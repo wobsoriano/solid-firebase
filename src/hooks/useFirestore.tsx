@@ -7,10 +7,8 @@ import type {
 import { onSnapshot } from 'firebase/firestore'
 import { createComputed, onCleanup } from 'solid-js'
 import { createStore, reconcile } from 'solid-js/store'
-import type { MaybeAccessor } from '../utils'
+import type { FirebaseDocRef, MaybeAccessor } from '../utils'
 import { access, getData, isDefined, isDocumentReference } from '../utils'
-
-export type FirebaseDocRef<T> = Query<T> | DocumentReference<T>
 
 interface UseFireStoreReturn<T> {
   data: T

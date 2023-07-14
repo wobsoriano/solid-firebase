@@ -6,14 +6,10 @@ import type {
 import { getDoc, getDocs } from 'firebase/firestore'
 import type { InitializedResource } from 'solid-js'
 import { createResource } from 'solid-js'
-import type { MaybeAccessor } from '../utils'
+import type { Falsy, FirebaseDocRef, MaybeAccessor } from '../utils'
 import { access, getData, isDefined, isDocumentReference } from '../utils'
 
-export type FirebaseDocRef<T> = Query<T> | DocumentReference<T>
-
 type UseFireStoreOnceReturn<T> = InitializedResource<T>
-
-type Falsy = false | 0 | '' | null | undefined
 
 export function useFirestoreOnce<T extends DocumentData>(
   maybeDocRef: MaybeAccessor<DocumentReference<T> | Falsy>,

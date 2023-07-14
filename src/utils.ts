@@ -1,4 +1,4 @@
-import type { DocumentReference, DocumentSnapshot, QueryDocumentSnapshot } from 'firebase/firestore'
+import type { DocumentReference, DocumentSnapshot, Query, QueryDocumentSnapshot } from 'firebase/firestore'
 import type { Accessor } from 'solid-js'
 
 export type MaybeAccessor<T> = T | Accessor<T>
@@ -30,3 +30,7 @@ export function getData<T>(docRef: DocumentSnapshot<T> | QueryDocumentSnapshot<T
 
   return data
 }
+
+export type FirebaseDocRef<T> = Query<T> | DocumentReference<T>
+
+export type Falsy = false | 0 | '' | null | undefined
