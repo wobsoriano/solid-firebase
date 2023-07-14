@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.1.8",
   "private": false,
-  "packageManager": "pnpm@8.5.1",
+  "packageManager": "pnpm@8.6.7",
   "description": "Solid primitives for Firebase.",
   "author": "wobsoriano",
   "license": "MIT",
@@ -61,17 +61,17 @@
     "solid-js": ">=1.6.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config-ts": "^0.38.6",
-    "bumpp": "^9.1.0",
-    "esbuild": "^0.17.19",
+    "@antfu/eslint-config-ts": "^0.39.7",
+    "bumpp": "^9.1.1",
+    "esbuild": "^0.18.12",
     "esbuild-plugin-solid": "^0.5.0",
-    "eslint": "^8.40.0",
+    "eslint": "^8.44.0",
     "eslint-plugin-solid": "^0.12.1",
-    "firebase": "^9.22.0",
-    "solid-js": "^1.7.5",
-    "tsup": "^6.7.0",
-    "typescript": "^5.0.4",
-    "vite": "^4.3.7",
+    "firebase": "^10.0.0",
+    "solid-js": "^1.7.8",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.3",
     "vite-plugin-solid": "^2.7.0"
   }
 }
