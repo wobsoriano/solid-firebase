@@ -1,21 +1,18 @@
-import type { FirebaseApp, FirebaseOptions } from 'firebase/app'
-import { initializeApp } from 'firebase/app'
+import type { FirebaseApp } from 'firebase/app'
 import type { Component, JSX } from 'solid-js'
 import { createContext } from 'solid-js'
 
 export const FirebaseContext = createContext<FirebaseApp>()
 
 interface Props {
-  config: FirebaseOptions
+  firebaseApp: FirebaseApp
   children: JSX.Element
 }
 
 export const FirebaseProvider: Component<Props> = (props) => {
-  // eslint-disable-next-line solid/reactivity
-  const app = initializeApp(props.config)
-
   return (
-    <FirebaseContext.Provider value={app}>
+    // eslint-disable-next-line solid/reactivity
+    <FirebaseContext.Provider value={props.firebaseApp}>
       {props.children}
     </FirebaseContext.Provider>
   )

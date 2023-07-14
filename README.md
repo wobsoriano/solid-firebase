@@ -23,11 +23,11 @@ import { render } from 'solid-js/web'
 import { FirebaseProvider } from 'solid-firebase'
 import App from './App'
 
-const firebaseConfig = {}
+const app = initializeApp({ projectId: 'MY PROJECT ID' })
 
 render(
   () => (
-    <FirebaseProvider config={firebaseConfig}>
+    <FirebaseProvider config={app}>
       <App />
     </FirebaseProvider>
   ),
