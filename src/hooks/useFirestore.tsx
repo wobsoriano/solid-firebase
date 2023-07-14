@@ -17,21 +17,21 @@ interface UseFireStoreReturn<T> {
 }
 
 export function useFirestore<T extends DocumentData>(
-  docRef: MaybeAccessor<DocumentReference<T>>,
+  maybeDocRef: MaybeAccessor<DocumentReference<T>>,
   initialValue: T
 ): UseFireStoreReturn<T | null>
 export function useFirestore<T extends DocumentData>(
-  docRef: MaybeAccessor<Query<T>>,
+  maybeDocRef: MaybeAccessor<Query<T>>,
   initialValue: T[]
 ): UseFireStoreReturn<T[]>
 
 // nullable initial values
 export function useFirestore<T extends DocumentData>(
-  docRef: MaybeAccessor<DocumentReference<T>>,
+  maybeDocRef: MaybeAccessor<DocumentReference<T>>,
   initialValue?: T | undefined
 ): UseFireStoreReturn<T | undefined | null>
 export function useFirestore<T extends DocumentData>(
-  docRef: MaybeAccessor<Query<T>>,
+  maybeDocRef: MaybeAccessor<Query<T>>,
   initialValue?: T[]
 ): UseFireStoreReturn<T[] | undefined>
 
@@ -39,11 +39,11 @@ export function useFirestore<T extends DocumentData>(
  * Retrive and monitor value of Collections and
  * Documents stored with Cloud Firestore.
  *
- * @param docRef
+ * @param maybeDocRef
  * @param initialValue
  */
 export function useFirestore<T extends DocumentData>(
-  docRef: MaybeAccessor<FirebaseDocRef<T>>,
+  maybeDocRef: MaybeAccessor<FirebaseDocRef<T>>,
   initialValue: any = undefined,
 ) {
   const [state, setState] = createStore<UseFireStoreReturn<T | T[] | null>>({
@@ -55,9 +55,9 @@ export function useFirestore<T extends DocumentData>(
   createComputed(() => {
     let close: () => void
 
-    if (isDocumentReference<T>(access(docRef))) {
+    if (isDocumentReference<T>(access(maybeDocRef))) {
       close = onSnapshot(
-        access(docRef) as DocumentReference<T>,
+        access(maybeDocRef) as DocumentReference<T>,
         (snapshot) => {
           setState(
             reconcile({
@@ -80,7 +80,7 @@ export function useFirestore<T extends DocumentData>(
     }
     else {
       close = onSnapshot(
-        access(docRef) as Query<T>,
+        access(maybeDocRef) as Query<T>,
         (querySnapshot) => {
           setState(
             reconcile({
