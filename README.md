@@ -160,7 +160,7 @@ import { useDownloadURL, useFirebaseApp } from 'solid-firebase'
 function App() {
   const app = useFirebaseApp()
   const storage = getStorage(app)
-  const state = useDownloadURL(ref(
+  const data = useDownloadURL(ref(
     storage,
     'images/yourimage.jpg',
   ))
@@ -168,18 +168,18 @@ function App() {
   // or with an accessor
   const [location] = createSignal('images/yourimage.jpg')
   const downloadRef = createMemo(() => ref(storage, location()))
-  const state = useDownloadURL(downloadRef)
+  const data = useDownloadURL(downloadRef)
 
   return (
     <Switch>
-      <Match when={state.loading}>
+      <Match when={data.loading}>
         <p>Download URL: Loading...</p>
       </Match>
-      <Match when={state.error}>
-        <p>Error: {state.error?.name}</p>
+      <Match when={data.error}>
+        <p>Error: {data.error?.name}</p>
       </Match>
-      <Match when={state.data}>
-        <img src={state.data} alt="pic" />
+      <Match when={data()}>
+        <img src={data()} alt="pic" />
       </Match>
     </Switch>
   )
