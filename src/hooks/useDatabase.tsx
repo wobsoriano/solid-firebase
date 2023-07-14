@@ -22,9 +22,6 @@ export function useDatabase<T = any>(docRef: MaybeAccessor<DatabaseReference>) {
   })
 
   createComputed(() => {
-    setState('loading', true)
-    setState('error', null)
-
     const close = onValue(
       access(docRef),
       (snapshot) => {

@@ -80,9 +80,6 @@ export function useFirestore<T extends DocumentData>(
   createComputed(() => {
     let close: () => void
 
-    setState('loading', true)
-    setState('error', null)
-
     if (isDocumentReference<T>(access(docRef))) {
       close = onSnapshot(
         access(docRef) as DocumentReference<T>,
