@@ -1,7 +1,7 @@
 {
   "name": "solid-firebase",
   "type": "module",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": false,
   "packageManager": "pnpm@8.6.7",
   "description": "Solid primitives for Firebase.",
