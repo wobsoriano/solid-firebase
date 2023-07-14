@@ -36,7 +36,7 @@ export function useFirestore<T extends DocumentData>(
 ): UseFireStoreReturn<T[] | undefined>
 
 /**
- * Provides convenience listeners for Collections and
+ * Retrive and monitor value of Collections and
  * Documents stored with Cloud Firestore.
  *
  * @param docRef

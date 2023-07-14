@@ -31,7 +31,7 @@ export function useFirestoreOnce<T extends DocumentData>(
 ): UseFireStoreOnceReturn<T[] | undefined>
 
 /**
- * Provides convenience listeners for Collections and
+ * Retrive the current value of Collections and
  * Documents stored with Cloud Firestore.
  *
  * @param maybeDocRef
