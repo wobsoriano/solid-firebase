@@ -20,6 +20,7 @@ Configure firebase app:
 
 ```tsx
 import { render } from 'solid-js/web'
+import { initializeApp } from 'firebase/app'
 import { FirebaseProvider } from 'solid-firebase'
 import App from './App'
 
