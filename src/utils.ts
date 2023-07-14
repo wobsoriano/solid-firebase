@@ -1,4 +1,4 @@
-import type { DocumentReference } from 'firebase/firestore'
+import type { DocumentReference, DocumentSnapshot, QueryDocumentSnapshot } from 'firebase/firestore'
 import type { Accessor } from 'solid-js'
 
 export type MaybeAccessor<T> = T | Accessor<T>
@@ -16,4 +16,17 @@ export function isDefined<T = any>(val?: T): val is T {
 
 export function access<T extends MaybeAccessor<any>>(v: T): MaybeAccessorValue<T> {
   return typeof v === 'function' && !v.length ? v() : v
+}
+
+export function getData<T>(docRef: DocumentSnapshot<T> | QueryDocumentSnapshot<T>) {
+  const data = docRef.data()
+
+  if (data) {
+    Object.defineProperty(data, 'id', {
+      value: docRef.id.toString(),
+      writable: false,
+    })
+  }
+
+  return data
 }

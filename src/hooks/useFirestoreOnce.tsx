@@ -1,30 +1,15 @@
 import type {
   DocumentData,
   DocumentReference,
-  DocumentSnapshot,
   Query,
-  QueryDocumentSnapshot,
 } from 'firebase/firestore'
 import { getDoc, getDocs } from 'firebase/firestore'
 import type { InitializedResource } from 'solid-js'
 import { createResource } from 'solid-js'
 import type { MaybeAccessor } from '../utils'
-import { access, isDefined, isDocumentReference } from '../utils'
+import { access, getData, isDefined, isDocumentReference } from '../utils'
 
 export type FirebaseDocRef<T> = Query<T> | DocumentReference<T>
-
-function getData<T>(docRef: DocumentSnapshot<T> | QueryDocumentSnapshot<T>) {
-  const data = docRef.data()
-
-  if (data) {
-    Object.defineProperty(data, 'id', {
-      value: docRef.id.toString(),
-      writable: false,
-    })
-  }
-
-  return data
-}
 
 type UseFireStoreOnceReturn<T> = InitializedResource<T>
 
