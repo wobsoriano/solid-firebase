@@ -9,7 +9,7 @@ import { getDoc, getDocs } from 'firebase/firestore'
 import type { InitializedResource } from 'solid-js'
 import { createResource } from 'solid-js'
 import type { MaybeAccessor } from '../utils'
-import { access } from '../utils'
+import { access, isDefined, isDocumentReference } from '../utils'
 
 export type FirebaseDocRef<T> = Query<T> | DocumentReference<T>
 
@@ -24,14 +24,6 @@ function getData<T>(docRef: DocumentSnapshot<T> | QueryDocumentSnapshot<T>) {
   }
 
   return data
-}
-
-function isDocumentReference<T>(docRef: any): docRef is DocumentReference<T> {
-  return (docRef.path?.match(/\//g) || []).length % 2 !== 0
-}
-
-function isDefined<T = any>(val?: T): val is T {
-  return typeof val !== 'undefined'
 }
 
 type UseFireStoreOnceReturn<T> = InitializedResource<T>
