@@ -95,7 +95,11 @@ function App() {
 
   // you can also use an accessor for reactive query
   const [postsLimit] = createSignal(10)
-  const postsQuery = createMemo(() => query(collection(db, 'posts'), orderBy('createdAt', 'desc'), limit(postsLimit())))
+  const postsQuery = createMemo(() => query(
+    collection(db, 'posts'),
+    orderBy('createdAt', 'desc'),
+    limit(postsLimit())
+  ))
   const posts = useFirestore(postsQuery)
 
   return (
