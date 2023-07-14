@@ -165,6 +165,11 @@ function App() {
     'images/yourimage.jpg',
   ))
 
+  // or with an accessor
+  const [location] = createSignal('images/yourimage.jpg')
+  const downloadRef = createMemo(() => ref(storage, location()))
+  const state = useDownloadURL(downloadRef)
+
   return (
     <Switch>
       <Match when={state.loading}>
