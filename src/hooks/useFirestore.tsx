@@ -7,7 +7,8 @@ import type {
   QueryDocumentSnapshot,
 } from 'firebase/firestore'
 import { onSnapshot } from 'firebase/firestore'
-import { onCleanup } from 'solid-js'
+import type { Accessor } from 'solid-js'
+import { createComputed, onCleanup } from 'solid-js'
 import { createStore, reconcile } from 'solid-js/store'
 
 export type FirebaseDocRef<T> = Query<T> | DocumentReference<T>
@@ -33,6 +34,15 @@ function isDefined<T = any>(val?: T): val is T {
   return typeof val !== 'undefined'
 }
 
+type MaybeAccessor<T> = T | Accessor<T>
+type MaybeAccessorValue<T extends MaybeAccessor<any>> = T extends () => any
+  ? ReturnType<T>
+  : T
+
+function access<T extends MaybeAccessor<any>>(v: T): MaybeAccessorValue<T> {
+  return typeof v === 'function' && !v.length ? v() : v
+}
+
 interface UseFireStoreReturn<T> {
   data: T
   loading: boolean
@@ -40,21 +50,21 @@ interface UseFireStoreReturn<T> {
 }
 
 export function useFirestore<T extends DocumentData>(
-  docRef: DocumentReference<T>,
+  docRef: MaybeAccessor<DocumentReference<T>>,
   initialValue: T
 ): UseFireStoreReturn<T | null>
 export function useFirestore<T extends DocumentData>(
-  docRef: Query<T>,
+  docRef: MaybeAccessor<Query<T>>,
   initialValue: T[]
 ): UseFireStoreReturn<T[]>
 
 // nullable initial values
 export function useFirestore<T extends DocumentData>(
-  docRef: DocumentReference<T>,
+  docRef: MaybeAccessor<DocumentReference<T>>,
   initialValue?: T | undefined
 ): UseFireStoreReturn<T | undefined | null>
 export function useFirestore<T extends DocumentData>(
-  docRef: Query<T>,
+  docRef: MaybeAccessor<Query<T>>,
   initialValue?: T[]
 ): UseFireStoreReturn<T[] | undefined>
 
@@ -66,75 +76,71 @@ export function useFirestore<T extends DocumentData>(
  * @param initialValue
  */
 export function useFirestore<T extends DocumentData>(
-  docRef: FirebaseDocRef<T>,
+  docRef: MaybeAccessor<FirebaseDocRef<T>>,
   initialValue: any = undefined,
 ) {
-  if (isDocumentReference<T>(docRef)) {
-    const [state, setState] = createStore<UseFireStoreReturn<T | null>>({
-      data: initialValue,
-      loading: true,
-      error: null,
-    })
+  const [state, setState] = createStore<UseFireStoreReturn<T | T[] | null>>({
+    data: initialValue,
+    loading: true,
+    error: null,
+  })
 
-    const close = onSnapshot(
-      docRef,
-      (snapshot) => {
-        setState(
-          reconcile({
-            loading: false,
-            data: getData(snapshot) || null,
-            error: null,
-          }),
-        )
-      },
-      (error) => {
-        setState(
-          reconcile({
-            loading: false,
-            data: null,
-            error,
-          }),
-        )
-      },
-    )
+  createComputed(() => {
+    let close: () => void
+
+    setState('loading', true)
+    setState('error', null)
+
+    if (isDocumentReference<T>(access(docRef))) {
+      close = onSnapshot(
+        access(docRef) as DocumentReference<T>,
+        (snapshot) => {
+          setState(
+            reconcile({
+              loading: false,
+              data: getData(snapshot) || null,
+              error: null,
+            }),
+          )
+        },
+        (error) => {
+          setState(
+            reconcile({
+              loading: false,
+              data: null,
+              error,
+            }),
+          )
+        },
+      )
+    }
+    else {
+      close = onSnapshot(
+        access(docRef) as Query<T>,
+        (querySnapshot) => {
+          setState(
+            reconcile({
+              loading: false,
+              data: querySnapshot.docs.map(getData).filter(isDefined),
+              error: null,
+            }),
+          )
+        },
+        (error) => {
+          setState(
+            reconcile({
+              loading: false,
+              data: null,
+              error,
+            }),
+          )
+        },
+      )
+    }
 
     onCleanup(() => {
       close()
     })
-
-    return state
-  }
-
-  const [state, setState] = createStore({
-    data: initialValue,
-    loading: true,
-    error: null as FirestoreError | null,
-  })
-
-  const close = onSnapshot(
-    docRef,
-    (querySnapshot) => {
-      setState(
-        reconcile({
-          loading: false,
-          data: querySnapshot.docs.map(getData).filter(isDefined),
-          error: null,
-        }),
-      )
-    },
-    (error) => {
-      setState(
-        reconcile({
-          loading: false,
-          data: null,
-          error,
-        }),
-      )
-    },
-  )
-
-  onCleanup(() => {
-    close()
   })
 
   return state

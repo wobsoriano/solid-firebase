@@ -81,8 +81,8 @@ function App() {
 [useFirestore](https://github.com/wobsoriano/solid-firebase/blob/master/packages/lib/src/hooks/useFirestore.tsx) is a [Cloud Firestore](https://firebase.google.com/docs/firestore) binding that makes it straightforward to always keep your local data in sync with remotes databases.
 
 ```tsx
-import { Match, Switch } from 'solid-js'
-import { collection, getFirestore } from 'firebase/firestore'
+import { Match, Switch, createMemo, createSignal } from 'solid-js'
+import { collection, getFirestore, limit, orderBy } from 'firebase/firestore'
 import { useFirebaseApp, useFirestore } from 'solid-firebase'
 
 function App() {
@@ -92,6 +92,11 @@ function App() {
 
   // or for doc reference
   const todo = useFirestore(doc(db, 'todos', 'todo-id'))
+
+  // you can also use an accessor for reactive query
+  const [postsLimit] = createSignal(10)
+  const postsQuery = createMemo(() => query(collection(db, 'posts'), orderBy('createdAt', 'desc'), limit(postsLimit())))
+  const posts = useFirestore(postsQuery)
 
   return (
     <Switch>
