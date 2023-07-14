@@ -1,42 +1,18 @@
 import type { StorageReference } from 'firebase/storage'
 import { getDownloadURL } from 'firebase/storage'
-import { createStore, reconcile } from 'solid-js/store'
+import { createResource } from 'solid-js'
+import type { MaybeAccessor } from '../utils'
+import { access } from '../utils'
 
 /**
  * Convenience listeners for files stored within Firebase Cloud Storage.
  *
- * @param storageRef
+ * @param maybeStorageRef
  */
-export function useDownloadURL(storageRef: StorageReference) {
-  const [state, setState] = createStore<{
-    loading: boolean
-    error: Error | null
-    data: string | null
-  }>({
-    loading: true,
-    error: null,
-    data: null,
+export function useDownloadURL(maybeStorageRef: MaybeAccessor<StorageReference>) {
+  const [data] = createResource(() => access(maybeStorageRef), (storageRef) => {
+    return getDownloadURL(storageRef)
   })
 
-  getDownloadURL(storageRef)
-    .then((url) => {
-      setState(
-        reconcile({
-          loading: false,
-          error: null,
-          data: url,
-        }),
-      )
-    })
-    .catch((error) => {
-      setState(
-        reconcile({
-          loading: false,
-          error,
-          data: null,
-        }),
-      )
-    })
-
-  return state
+  return data
 }
