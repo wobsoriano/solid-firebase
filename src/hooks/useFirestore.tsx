@@ -7,9 +7,10 @@ import type {
   QueryDocumentSnapshot,
 } from 'firebase/firestore'
 import { onSnapshot } from 'firebase/firestore'
-import type { Accessor } from 'solid-js'
 import { createComputed, onCleanup } from 'solid-js'
 import { createStore, reconcile } from 'solid-js/store'
+import type { MaybeAccessor } from '../utils'
+import { access } from '../utils'
 
 export type FirebaseDocRef<T> = Query<T> | DocumentReference<T>
 
@@ -32,15 +33,6 @@ function isDocumentReference<T>(docRef: any): docRef is DocumentReference<T> {
 
 function isDefined<T = any>(val?: T): val is T {
   return typeof val !== 'undefined'
-}
-
-type MaybeAccessor<T> = T | Accessor<T>
-type MaybeAccessorValue<T extends MaybeAccessor<any>> = T extends () => any
-  ? ReturnType<T>
-  : T
-
-function access<T extends MaybeAccessor<any>>(v: T): MaybeAccessorValue<T> {
-  return typeof v === 'function' && !v.length ? v() : v
 }
 
 interface UseFireStoreReturn<T> {
