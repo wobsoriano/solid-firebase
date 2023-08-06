@@ -61,7 +61,7 @@ function App() {
   const state = useAuth(getAuth(app))
 
   return (
-    <Switch>
+    <Switch fallback={<Login />}>
       <Match when={state.loading}>
         <p>Loading...</p>
       </Match>
